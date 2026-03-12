@@ -7,7 +7,7 @@ import ui.TipCalculatorScreen
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
-        title = "calculator",
+        title = "Calculadora De Propinas",
     ) {
         TipCalculatorScreen()
     }
