@@ -19,12 +19,6 @@ fun TipCalculatorScreen(
 ){
     val uiState by viewModel.uiState.collectAsState()
 
-    DisposableEffect(Unit) {
-        println("Entrando")
-        onDispose {
-            println("Saliendo")
-        }
-    }
 
     Column(
         modifier = Modifier
