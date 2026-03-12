@@ -55,5 +55,6 @@ class TipCalculatorViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
+        println("Muerto!")
     }
 }
