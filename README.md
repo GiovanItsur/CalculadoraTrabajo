@@ -21,7 +21,9 @@ Para Android:
 
 <img width="488" height="51" alt="image" src="https://github.com/user-attachments/assets/7b1b15bc-540e-4485-9c80-5aa17757ac38" />
 
-<img width="971" height="700" alt="image" src="https://github.com/user-attachments/assets/7323c88a-cefd-451f-a406-e01a27a8a046" />
-<img width="977" height="700" alt="image" src="https://github.com/user-attachments/assets/94511220-05db-4d7f-98a0-44ce666200e7" />
+<img width="776" height="589" alt="image" src="https://github.com/user-attachments/assets/14e5329f-6189-4b1e-9154-eb637027048a" />
+<img width="773" height="586" alt="image" src="https://github.com/user-attachments/assets/61360f37-d9d7-45f9-8127-729b99918f8d" />
+
+
 
 
