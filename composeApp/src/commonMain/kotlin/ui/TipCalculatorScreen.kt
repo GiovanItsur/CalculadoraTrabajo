@@ -16,13 +16,13 @@ import viewmodel.TipCalculatorViewModel
 @Composable
 fun TipCalculatorScreen(
     viewModel: TipCalculatorViewModel = viewModel { TipCalculatorViewModel() }
-) {
+){
     val uiState by viewModel.uiState.collectAsState()
 
     DisposableEffect(Unit) {
-        println("Compose: Entrando a la composición de TipCalculatorScreen")
+        println("Entrando")
         onDispose {
-            println("Compose: Saliendo de la composición de TipCalculatorScreen (Dispose)")
+            println("Saliendo")
         }
     }
 
@@ -33,21 +33,21 @@ fun TipCalculatorScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Calculate Tip", style = MaterialTheme.typography.bodySmall)
+        Text(text = "CALCULAR PROPINA", style = MaterialTheme.typography.labelLarge)
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
             value = uiState.billAmount,
-            onValueChange = { viewModel.onBillAmountChange(it) },
-            label = { Text("Monto de la cuenta") },
+            onValueChange = { viewModel.billAmountUpdate(it) },
+            label = { Text("Total Monto Recibo") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
             value = uiState.tipPercentage,
-            onValueChange = { viewModel.onTipPercentageChange(it) },
-            label = { Text("Porcentaje de propina (%)") },
+            onValueChange = { viewModel.tipPercentageUpdate(it) },
+            label = { Text("Porcentaje Propina") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -57,10 +57,10 @@ fun TipCalculatorScreen(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Redondear hacia arriba")
+            Text("Redondear Arriba!")
             Switch(
-                checked = uiState.roundUp,
-                onCheckedChange = { viewModel.onRoundUpChange(it) }
+                checked = uiState.roundTip,
+                onCheckedChange = { viewModel.roundTipUpdate(it) }
             )
         }
         Spacer(modifier = Modifier.height(32.dp))
