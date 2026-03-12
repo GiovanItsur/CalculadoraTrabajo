@@ -6,48 +6,54 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlin.math.ceil
-data class TipUiState(
+
+data class calculatorUiState(
     val billAmount: String = "",
-    val tipPercentage: String = "15",
-    val roundUp: Boolean = false,
+    val tipPercentage: String = "",
+    val roundTip: Boolean = false,
     val tipResult: String = "$0.00"
 )
 
 class TipCalculatorViewModel : ViewModel() {
-    private val _uiState = MutableStateFlow(TipUiState())
-    val uiState: StateFlow<TipUiState> = _uiState.asStateFlow()
+    private val uiStateMutable = MutableStateFlow(calculatorUiState())
+    val uiState = uiStateMutable.asStateFlow()
 
-    fun onBillAmountChange(amount: String) {
-        _uiState.update { it.copy(billAmount = amount) }
+    fun billAmountUpdate(recibo: String) {
+        uiStateMutable.update {
+            it.copy(billAmount = recibo)
+        }
         calculateTip()
     }
 
-    fun onTipPercentageChange(percentage: String) {
-        _uiState.update { it.copy(tipPercentage = percentage) }
+    fun tipPercentageUpdate(porcentaje: String) {
+        uiStateMutable.update {
+            it.copy(tipPercentage = porcentaje)
+        }
         calculateTip()
     }
 
-    fun onRoundUpChange(roundUp: Boolean) {
-        _uiState.update { it.copy(roundUp = roundUp) }
+    fun roundTipUpdate(redondear: Boolean) {
+        uiStateMutable.update {
+            it.copy(roundTip = redondear)
+        }
         calculateTip()
     }
 
-    private fun calculateTip() {
-        val amount = _uiState.value.billAmount.toDoubleOrNull() ?: 0.0
-        val percentage = _uiState.value.tipPercentage.toDoubleOrNull() ?: 0.0
+    private fun calculateTip(){
+        val recibo = uiStateMutable.value.billAmount.toDoubleOrNull() ?: 0.0
+        val porcentaje = uiStateMutable.value.tipPercentage.toDoubleOrNull() ?: 0.0
+        var tipBefore = porcentaje / 100 * recibo
 
-        var tip = (percentage / 100) * amount
-        if (_uiState.value.roundUp) {
-            tip = ceil(tip)
+        if(uiStateMutable.value.roundTip){
+            tipBefore = ceil(tipBefore)
         }
 
-        val formattedTip = "$${((tip * 100).toInt()) / 100.0}"
+        val resTip = "$${((tipBefore * 100).toInt() / 100.0)}%"
 
-        _uiState.update { it.copy(tipResult = formattedTip) }
+        uiStateMutable.update { it.copy(tipResult = resTip ) }
     }
 
     override fun onCleared() {
         super.onCleared()
-        println("ViewModel: onCleared() invocado. Liberando recursos y destruyendo ViewModel...")
     }
 }
