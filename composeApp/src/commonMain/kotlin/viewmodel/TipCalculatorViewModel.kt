@@ -48,7 +48,7 @@ class TipCalculatorViewModel : ViewModel() {
             tipBefore = ceil(tipBefore)
         }
 
-        val resTip = "$${((tipBefore * 100).toInt() / 100.0)}%"
+        val resTip = "$${((tipBefore * 100).toInt() / 100.0)}"
 
         uiStateMutable.update { it.copy(tipResult = resTip ) }
     }
